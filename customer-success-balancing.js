@@ -14,9 +14,10 @@ function customerSuccessBalancing(
   }
 
   const filteredCustomerSuccess = customerSuccess.filter(isNotAbsent);
+  filteredCustomerSuccess.forEach((CS) => CS.customerCounter = 0);
 }
 
-test("Scenario 1", () => {
+test.only("Scenario 1", () => {
   css = [
     { id: 1, score: 60 },
     { id: 2, score: 20 },
