@@ -33,9 +33,8 @@ function customerSuccessBalancing(
         CS.customerCounter += 1;
         customers = customers.filter(c => c.id !== customer.id);
       }
-
-      processedCustomerSuccess.sort(orderByCustomerCounterDESC);
     })
+    processedCustomerSuccess.sort(orderByCustomerCounterDESC);
   }
 
   const processedCustomerSuccess = customerSuccess.filter(isNotAbsent).sort(orderByScoreASC);
