@@ -12,12 +12,21 @@ function customerSuccessBalancing(
   function isNotAbsent(value) {
     return !customerSuccessAway.includes(value.id);
   }
+  
+  function orderByScore(a, b) {
+    if (a.score < b.score)
+      return -1;
+    if (a.score > b.score)
+      return 1;
+    return 0;
+  }
 
   const filteredCustomerSuccess = customerSuccess.filter(isNotAbsent);
-  filteredCustomerSuccess.forEach((CS) => CS.customerCounter = 0);
+
+  filteredCustomerSuccess.sort(orderByScore);  
 }
 
-test.only("Scenario 1", () => {
+test("Scenario 1", () => {
   css = [
     { id: 1, score: 60 },
     { id: 2, score: 20 },
