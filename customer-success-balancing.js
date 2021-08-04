@@ -9,11 +9,11 @@ function customerSuccessBalancing(
   customers,
   customerSuccessAway
 ) {
-  /**
-   * ===============================================
-   * =========== Write your solution here ==========
-   * ===============================================
-   */
+  function isNotAbsent(value) {
+    return !customerSuccessAway.includes(value.id);
+  }
+
+  const filteredCustomerSuccess = customerSuccess.filter(isNotAbsent);
 }
 
 test("Scenario 1", () => {
