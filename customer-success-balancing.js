@@ -25,7 +25,7 @@ function customerSuccessBalancing(
     return 0;
   }
 
-  function checkCustomer(CS) {
+  function customersDistribution(CS) {
     CS.customerCounter = 0;
 
     customers.map((customer) => {
@@ -34,18 +34,18 @@ function customerSuccessBalancing(
         customers = customers.filter(c => c.id !== customer.id);
       }
 
-      filteredCustomerSuccess.sort(orderByCustomerCounterDESC);
+      processedCustomerSuccess.sort(orderByCustomerCounterDESC);
     })
   }
 
-  const filteredCustomerSuccess = customerSuccess.filter(isNotAbsent).sort(orderByScoreASC);
+  const processedCustomerSuccess = customerSuccess.filter(isNotAbsent).sort(orderByScoreASC);
 
-  filteredCustomerSuccess.map((CS) => checkCustomer(CS));
+  processedCustomerSuccess.map((CS) => customersDistribution(CS));
 
-  if(filteredCustomerSuccess[0].customerCounter == filteredCustomerSuccess[1].customerCounter) {
+  if(processedCustomerSuccess[0].customerCounter == processedCustomerSuccess[1].customerCounter) {
     return 0;
   }
-  return filteredCustomerSuccess[0].id;
+  return processedCustomerSuccess[0].id;
 }
 
 test("Scenario 1", () => {
