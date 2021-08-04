@@ -9,7 +9,7 @@ function customerSuccessBalancing(
   customers,
   customerSuccessAway
 ) {
-  function isNotAbsent(value) {
+  function isAbsent(value) {
     return !customerSuccessAway.includes(value.id);
   }
   
@@ -34,12 +34,13 @@ function customerSuccessBalancing(
         customers = customers.filter(c => c.id !== customer.id);
       }
     })
-    processedCustomerSuccess.sort(orderByCustomerCounterDESC);
   }
 
-  const processedCustomerSuccess = customerSuccess.filter(isNotAbsent).sort(orderByScoreASC);
+  const processedCustomerSuccess = customerSuccess.filter(isAbsent).sort(orderByScoreASC);
 
   processedCustomerSuccess.map((CS) => customersDistribution(CS));
+
+  processedCustomerSuccess.sort(orderByCustomerCounterDESC);
 
   if(processedCustomerSuccess[0].customerCounter == processedCustomerSuccess[1].customerCounter) {
     return 0;
