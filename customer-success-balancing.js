@@ -21,9 +21,22 @@ function customerSuccessBalancing(
     return 0;
   }
 
+  function checkCustomer(CS) {
+    CS.customerCounter = 0;
+
+    customers.forEach((customer) => {
+      if(customer.score < CS.score) {
+        CS.customerCounter += 1;
+        customers.splice(0, 1);
+      }
+    })
+  }
+
   const filteredCustomerSuccess = customerSuccess.filter(isNotAbsent);
 
-  filteredCustomerSuccess.sort(orderByScore);  
+  filteredCustomerSuccess.sort(orderByScore);
+
+  filteredCustomerSuccess.forEach((CS) => checkCustomer(CS));
 }
 
 test("Scenario 1", () => {
