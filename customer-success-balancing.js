@@ -13,11 +13,9 @@ function customerSuccessBalancing(
     return !customerSuccessAway.includes(value.id);
   }
   
-  function orderByScore(a, b) {
-    if (a.score < b.score)
-      return -1;
-    if (a.score > b.score)
-      return 1;
+  function orderByScoreASC(a, b) {
+    if (a.score < b.score) return -1;
+    if (a.score > b.score) return 1;
     return 0;
   }
 
@@ -46,9 +44,8 @@ function customerSuccessBalancing(
     return CSWithMostCustomers.id;
   }
 
-  const filteredCustomerSuccess = customerSuccess.filter(isNotAbsent);
+  const filteredCustomerSuccess = customerSuccess.filter(isNotAbsent).sort(orderByScoreASC);
 
-  filteredCustomerSuccess.sort(orderByScore);
   filteredCustomerSuccess.map((CS) => checkCustomer(CS));
 
   return checkBestPerformance(filteredCustomerSuccess);
