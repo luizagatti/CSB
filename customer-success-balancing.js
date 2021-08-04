@@ -24,19 +24,34 @@ function customerSuccessBalancing(
   function checkCustomer(CS) {
     CS.customerCounter = 0;
 
-    customers.forEach((customer) => {
-      if(customer.score < CS.score) {
+    customers.map((customer) => {
+      if(customer.score <= CS.score) {
         CS.customerCounter += 1;
-        customers.splice(0, 1);
+        customers = customers.filter(c => c.id !== customer.id);
       }
     })
+  }
+
+  function checkBestPerformance(customerSuccessData) {
+    let CSWithMostCustomers = {id: 0, customerCounter: 0};
+
+    customerSuccessData.map((CS) => {
+      if(CS.customerCounter > CSWithMostCustomers.customerCounter) {
+        CSWithMostCustomers = CS
+      } else if(CS.customerCounter == CSWithMostCustomers.customerCounter) {
+        CSWithMostCustomers = {id: 0, customerCounter: CS.customerCounter}
+      }
+    })
+
+    return CSWithMostCustomers.id;
   }
 
   const filteredCustomerSuccess = customerSuccess.filter(isNotAbsent);
 
   filteredCustomerSuccess.sort(orderByScore);
+  filteredCustomerSuccess.map((CS) => checkCustomer(CS));
 
-  filteredCustomerSuccess.forEach((CS) => checkCustomer(CS));
+  return checkBestPerformance(filteredCustomerSuccess);
 }
 
 test("Scenario 1", () => {
